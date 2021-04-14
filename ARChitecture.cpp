@@ -4,6 +4,8 @@
 #include <math.h>
 using namespace std;
 
+
+
 void print(vector<vector<int>> line, int size)
 {
     for (int i = 0; i < size; i++)
@@ -14,6 +16,7 @@ void print(vector<vector<int>> line, int size)
         }
         cout << endl;
     }
+    cout << "isto é um teste de merda\n";
 }
 
 int mod_abs(int a, int mod) {
