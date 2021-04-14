@@ -16,6 +16,18 @@ void print(vector<vector<int>> line, int size)
     }
 }
 
+int mod_abs(int a, int mod) {
+  return ((a % mod) + mod) % mod;
+}
+
+int mod_add(int a, int b, int mod) {
+  return (mod_abs(a, mod) + mod_abs(b, mod)) % mod;
+}
+
+int mod_sub(int a, int b, int mod) {
+  return mod_add(a, -b, mod);
+}
+
 int main()
 {
     int ntestCases, n, h, H, numbers;
