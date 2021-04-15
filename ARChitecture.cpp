@@ -3,20 +3,28 @@
 #include <sstream>
 #include <math.h>
 using namespace std;
+/*
+t ≤ 20
+n ≤ 500
+h ≤ 500
+H ≤ 60000
+*/
 
+//function to debug 
+void print(int n, int h, int H){
+  cout << "n -> " << n << endl;
+  cout << "h -> " << h << endl;
+  cout << "H -> " << H << endl;
+}
 
-
-void print(vector<vector<int>> line, int size)
-{
-    for (int i = 0; i < size; i++)
-    {
-        for (int j = 0; j < 3; j++)
-        {
-            cout << line[i][j] << " ";
-        }
-        cout << endl;
+//function to debug 
+void printRoom(int n,int H,vector<vector<int>> room){
+  for(int i = 0 ; i < H ; i++){
+    for(int j = 0 ; j < n ; j ++){
+      cout << room[i][j] << " ";
     }
-    cout << "isto é um teste de merda\n";
+    cout << endl;
+  }
 }
 
 int mod_abs(int a, int mod) {
@@ -31,23 +39,25 @@ int mod_sub(int a, int b, int mod) {
   return mod_add(a, -b, mod);
 }
 
+void play(int n, int h, int H){
+  vector<vector<int>> room(H, vector<int>(n));
+  printRoom(n,H,room);
+}
+
 int main()
 {
-    int ntestCases, n, h, H, numbers;
-    vector<vector<int>> line;
-    vector<int> aux;
+    int ntestCases, n, h, H;
 
     cin >> ntestCases;
 
     for (int i = 0; i < ntestCases; i++)
     {
-        aux.clear();
-        for (int k = 0; k < 3; k++)
-        {
-            cin >> numbers;
-            aux.push_back(numbers);
-        }
-        line.push_back(aux);
+      cin >> n;
+      cin >> h;
+      cin >> H;
+
+      play(n,h,H);
+
     }
-    print(line, ntestCases);
+    
 }
