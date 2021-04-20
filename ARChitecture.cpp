@@ -28,7 +28,8 @@ int mod_sub(int a, int b, int mod)
 
 void play(int n, int h, int H)
 {
-  int room[H][n][2];
+  //int room[H][n][2];
+  vector<vector<vector<int> > > room (H,vector<vector<int> >(n,vector <int>(2,0)));
 
   int solution = 0;
 
@@ -43,7 +44,7 @@ void play(int n, int h, int H)
 
   //base case
   room[H - h][0][0] = 1;
-
+  
   for (int i = 0; i < n - 1; i++)
   {
     for (int j = 0; j < H; j++)
@@ -52,8 +53,10 @@ void play(int n, int h, int H)
       { // going up
         for (int k = 0; k < h - 1; k++)
         {
+          if(j - k - 1 >= 0){
+            room[j - k - 1][i + 1][0] = mod_add(room[j - k - 1][i + 1][0],room[j][i][0],1000000007);
+          }
           
-          room[j - k - 1][i + 1][0] = mod_add(room[j - k - 1][i + 1][0],room[j][i][0],1000000007);
         }
 
         for (int k = 0; k < h-1; k++)
