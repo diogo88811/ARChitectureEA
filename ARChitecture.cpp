@@ -25,67 +25,8 @@ int mod_sub(int a, int b, int mod)
   return mod_add(a, -b, mod);
 }
 
+
 void play(int n, int h, int H)
-{
-  vector<vector<vector<int>>> room(H, vector<vector<int>>(n, vector<int>(2, 0)));
-
-  int solution = 0;
-
-  //base case
-  room[H - h][0][0] = 1;
-
-  for (int i = 0; i < n - 1; i++)
-  {
-    for (int j = 0; j < H; j++)
-    {
-
-      for (int k = 0; k < h - 1; k++)
-      {
-        if (room[j][i][0] >= 1) // going up
-        {
-          if (j - k - 1 >= 0)
-          {
-            room[j - k - 1][i + 1][0] = mod_add(room[j - k - 1][i + 1][0], room[j][i][0], 1000000007);
-          }
-
-          if ((j + k + 1) < H - h + 1)
-          {
-            room[j + k + 1][i + 1][1] = mod_add(room[j + k + 1][i + 1][1], room[j][i][0], 1000000007);
-          }
-        }
-
-        if (room[j][i][1] >= 1) //going down
-        {
-
-          if ((j + k + 1) < H - h + 1)
-          {
-            room[j + k + 1][i + 1][1] = mod_add(room[j + k + 1][i + 1][1], room[j][i][1], 1000000007);
-          }
-        }
-      }
-    }
-    solution = mod_add(room[H - h][i][1], solution, 1000000007);
-  }
-  solution = mod_add(room[H - h][n - 1][1], solution, 1000000007);
-
-  cout << mod_abs(solution, 1000000007) << endl;
-
-
-
-  for (int i = 0; i < H; i++)
-  {
-    cout << "\n";
-    for (int j = 0; j < n; j++)
-    {
-      cout << room[i][j][0];
-      cout << "|";
-      cout << room[i][j][1];
-      cout << "   ";
-    }
-  }
-}
-
-void play2(int n, int h, int H)
 {
   vector<vector<vector<int>>> room(H, vector<vector<int>>(n, vector<int>(2, 0)));
 
@@ -106,7 +47,6 @@ void play2(int n, int h, int H)
       { 
         
         room[j][i][0] = mod_sub(mod_add(room[j + 1][i][0] , room[j + 1][i - 1][0], 1000000007) , room[j + h][i-1][0],1000000007);
-        //room[j][i][0] = room[j + 1][i][0] + room[j + 1][i - 1][0] - room[j + h][i-1][0];
       }
     }
 
@@ -114,32 +54,16 @@ void play2(int n, int h, int H)
       if(j+h <= H){
 
         room[j][i][1] = mod_add(mod_add(room[j - 1][i][1] , room[j - 1][i -1 ][1],1000000007) , room[j - 1][i -1][0],1000000007);
-        //room[j][i][1] = room[j - 1][i][1] + room[j - 1][i -1 ][1] + room[j - 1][i -1 ][0];
-        if(/*j!= n-1 &&*/ j-h >=0){
+        if(j-h >=0){
           room[j][i][1] = mod_sub(room[j][i][1],room[j-h][i-1][1],1000000007 );
-          //room[j][i][1] -= room[j-h][i-1][1];
-          //room[j][i][1] -= room[j-h][i-1][0];
           room[j][i][1] = mod_sub(room[j][i][1],room[j-h][i-1][0],1000000007 );
         }
       }
     }
     solution = mod_add(room[H - h][i][1], solution, 1000000007);
   }
-  //solution = mod_add(room[H - h][n - 1][1], solution, 1000000007);
 
   cout << mod_abs(solution, 1000000007) << endl;
-
-  /*for (int i = 0; i < H; i++)
-  {
-    cout << "\n";
-    for (int j = 0; j < n; j++)
-    {
-      cout << room[i][j][0];
-      cout << "|";
-      cout << room[i][j][1];
-      cout << "   ";
-    }
-  }*/
 
 }
 
@@ -155,8 +79,6 @@ int main()
     cin >> h;
     cin >> H;
 
-    //play(n, h, H);
-    play2(n, h, H);
-    //cout << endl;
+    play(n, h, H);
   }
 }
